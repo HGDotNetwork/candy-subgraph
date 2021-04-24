@@ -1,0 +1,38 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Contract
+    network: heco
+    source:
+      address: "0x0bb480582ecae1d22bbaeaccfbb849b441450026"
+      abi: Contract
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      entities:
+        - Packetstarted
+        - PacketClaimed
+        - Packetended
+        - ClaimedTokens
+        - ClaimedPacketTokens
+        - OwnershipTransferred
+      abis:
+        - name: Contract
+          file: ./abis/Contract.json
+      eventHandlers:
+        - event: Packetstarted(uint256,address)
+          handler: handlePacketstarted
+        - event: PacketClaimed(uint256,address,uint32,address)
+          handler: handlePacketClaimed
+        - event: Packetended(uint256,address)
+          handler: handlePacketended
+        - event: ClaimedTokens(address,address,uint256)
+          handler: handleClaimedTokens
+        - event: ClaimedPacketTokens(uint32,address,address,uint256)
+          handler: handleClaimedPacketTokens
+        - event: OwnershipTransferred(address,address)
+          handler: handleOwnershipTransferred
+      file: ./src/mapping.ts
