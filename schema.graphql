@@ -1,6 +1,10 @@
-type ExampleEntity @entity {
+type PackageEntity @entity {
   id: ID!
   count: BigInt!
   total: BigInt! # uint256
   tokenAddress: Bytes! # address
+}
+type PackageToken @entity {
+  id: ID!
+  total: BigInt! # uint256 
 }
